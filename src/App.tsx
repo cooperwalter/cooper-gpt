@@ -49,6 +49,13 @@ function App() {
     setCurrentTitle('')
   }
   
+  const handleInputKeyDown = async (e: any) => {
+    // if the key is enter, then get messages
+    if (e.key === 'Enter') {
+      await getMessages()
+    }
+  }
+
   const handleConversationClick = (index: number) => {
     const chatId = chatIdOrder[index]
     setCurrentChatId(chatId)
@@ -81,7 +88,7 @@ function App() {
         <Chat messages={currentMessages} />
         <div className="bottom-section">
           <div className="input-container">
-            <input value={value} onChange={(e) => setValue(e.target.value)} onKeyDown={getMessages} />
+            <input value={value} onChange={(e) => setValue(e.target.value)} onKeyDown={handleInputKeyDown} />
             <div id="submit" onClick={getMessages}>➢</div>
           </div>
           <p className="info">
