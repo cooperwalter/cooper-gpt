@@ -1,11 +1,7 @@
 import { useState } from 'react'
 import * as api from './services/api'
-
-interface Message {
-  chatId: string
-  content: string
-  role: string
-}
+import { Message } from './types'
+import Chat from './components/Chat';
 
 // create a random guid
 function guid() {
@@ -82,9 +78,7 @@ function App() {
       </section>
       <section className="main">
         {!currentTitle ? <h1>CooperGPT</h1> : null}
-        <ul className="feed">
-          {currentMessages.map((chat, index) => <li className={chat.role} key={index}><p>{chat.role}</p><p>{chat.content}</p></li>)}
-        </ul>
+        <Chat messages={currentMessages} />
         <div className="bottom-section">
           <div className="input-container">
             <input value={value} onChange={(e) => setValue(e.target.value)} />
