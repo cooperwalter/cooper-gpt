@@ -28,7 +28,7 @@ function App() {
   const [currentTitle, setCurrentTitle] = useState<string>('')
   const [fetching, setFetching] = useState<boolean>(false)
   const getMessages = async () => {
-    if (!fetching) {
+    if (!fetching && value !== '') {
       const msg = value
       setValue('')
       const chatId = currentChatId
