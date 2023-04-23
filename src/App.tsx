@@ -81,7 +81,7 @@ function App() {
         <Chat messages={currentMessages} />
         <div className="bottom-section">
           <div className="input-container">
-            <input value={value} onChange={(e) => setValue(e.target.value)} />
+            <input value={value} onChange={(e) => setValue(e.target.value)} onKeyDown={getMessages} />
             <div id="submit" onClick={getMessages}>➢</div>
           </div>
           <p className="info">
