@@ -84,7 +84,7 @@ function App() {
         </nav>
       </section>
       <section className="main">
-        {!currentTitle ? <h1>CooperGPT</h1> : null}
+        {!currentTitle ? <h1>CooperChat</h1> : null}
         <Chat messages={currentMessages} />
         <div className="bottom-section">
           <div className="input-container">
@@ -92,7 +92,7 @@ function App() {
             <div id="submit" onClick={getMessages}>➢</div>
           </div>
           <p className="info">
-            Cooper GPT April 21 Version. Free to use, but please credit me if you do. Does it sound like me? Let me know.
+            CooperChat April 25 Version. Free to use, but please credit me if you do. Does it sound like me? Let me know.
           </p>
         </div>
       </section>
