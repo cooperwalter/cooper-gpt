@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import * as api from './services/api'
 import { Message } from './types'
-import Chat from './components/Chat';
+import Chat from './chats/Chat';
+import { createChat, useChatOrder, useChats } from './chats/chatsSlice';
+import { useAppDispatch } from './store';
 
 // create a random guid
 function guid() {
@@ -22,9 +24,10 @@ const uniq = (arr: Array<string>) => {
 
 function App() {
   const [value, setValue] = useState<string>('')
-  const [chatIdOrder, setChatIdOrder] = useState<string[]>([])
   const [currentChatId, setCurrentChatId] = useState<string>(guid())
-  const [messages, setMessages] = useState<Message[]>([])
+  const dispatch = useAppDispatch()
+  const messages = useChats()
+  const chatOrder  = useChatOrder()
   const [currentTitle, setCurrentTitle] = useState<string>('')
   const [fetching, setFetching] = useState<boolean>(false)
   const getMessages = async () => {
@@ -34,11 +37,11 @@ function App() {
       const chatId = currentChatId
       const userContent = value
       const userMessage = { role: 'user', content: userContent, chatId }
+      dispatch(createChat(userMessage))
       setFetching(true)
       const data = await api.getMessages(msg)
       const assistantMessage = { ...data.choices[0].message, chatId }
-      setMessages((messages) => [...messages, userMessage, assistantMessage])
-      setChatIdOrder((chatIdOrder) => uniq([...chatIdOrder, chatId]))
+      dispatch(createChat(assistantMessage))
       setFetching(false)
     }
   }
@@ -57,20 +60,20 @@ function App() {
   }
 
   const handleConversationClick = (index: number) => {
-    const chatId = chatIdOrder[index]
+    const chatId = chatOrder[index]
     setCurrentChatId(chatId)
   }
 
   const currentMessages = messages.filter(message => message.chatId ===  currentChatId)
   const historyTitles = []
-  for (const chatId of chatIdOrder) {
+  for (const chatId of chatOrder) {
     const message = messages.find(message => message.chatId === chatId)
     if (message) {
       historyTitles.push(message.content)
     }
   }
 
-  console.log({ chatIdOrder, currentChatId, messages, currentMessages, historyTitles })
+  console.log({ chatOrder, currentChatId, currentMessages, historyTitles })
 
   return (
     <div className="app">
@@ -85,7 +88,7 @@ function App() {
       </section>
       <section className="main">
         {!currentTitle ? <h1>CooperChat</h1> : null}
-        <Chat messages={currentMessages} />
+        <Chat chatId={currentChatId} />
         <div className="bottom-section">
           <div className="input-container">
             <input value={value} onChange={(e) => setValue(e.target.value)} onKeyDown={handleInputKeyDown} />

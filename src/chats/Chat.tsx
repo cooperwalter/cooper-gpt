@@ -1,16 +1,12 @@
-import React from "react"
-import { Message } from "../types"
+import { useChats } from "./chatsSlice"
 
 interface ChatProps {
-  messages: Message[]
+  chatId: string
 }
 
- {/* <ul className="feed">
-          {currentMessages.map((chat, index) => <li className={chat.role} key={index}><p>{chat.role}</p><p>{chat.content}</p></li>)}
-        </ul> */}
-
 const Chat = (props: ChatProps) => {
-  const { messages } = props
+  const { chatId } = props
+  const messages = useChats(chatId)
   return (
     <div className="chat">
       {messages.map((message, index) => {
