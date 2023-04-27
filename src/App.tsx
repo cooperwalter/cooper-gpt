@@ -73,22 +73,44 @@ function App() {
       <section className="side-bar">
         <button onClick={createNewChat}>+ New Chat</button>
         <ul className="history">
-        {historyTitles.map((title, index) => <li key={index} onClick={() => handleConversationClick(index)}>{title}</li>)}
+          {historyTitles.map((title, index) => (
+            <li key={index} onClick={() => handleConversationClick(index)}>
+              {title}
+            </li>
+          ))}
         </ul>
         <nav>
           <p>Made by Cooper</p>
         </nav>
       </section>
       <section className="main">
-        {!currentTitle ? <h1>CooperChat</h1> : null}
+        {!currentTitle ? (
+          <>
+            <div className="app-title">
+              <p className="app-title__text">CooperChat: V1</p>
+            </div>
+            <div className="bottom-border" />
+          </>
+        ) : null}
         <Chat chatId={currentChatId} />
         <div className="bottom-section">
           <div className="input-container">
-            <input value={value} onChange={(e) => setValue(e.target.value)} onKeyDown={handleInputKeyDown} />
-            <div id="submit" onClick={getMessages} className={`${value.length > 0 ? 'active' : 'inactive'}`}>➢</div>
+            <input
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              onKeyDown={handleInputKeyDown}
+            />
+            <div
+              id="submit"
+              onClick={getMessages}
+              className={`${value.length > 0 ? "active" : "inactive"}`}
+            >
+              ➢
+            </div>
           </div>
           <p className="info">
-            CooperChat April 25 Version. Free to use, but please credit me if you do. Does it sound like me? Let me know.
+            CooperChat April 25 Version. Free to use, but please credit me if
+            you do. Does it sound like me? Let me know.
           </p>
         </div>
       </section>
