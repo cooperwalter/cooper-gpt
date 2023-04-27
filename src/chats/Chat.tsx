@@ -13,7 +13,7 @@ const Chat = (props: ChatProps) => {
         console.log(`chat_message chat_message-${message.role}`)
         return (
         <div key={index} className={`chat_message chat_message-${message.role}`}>
-          {message.content}
+          {message.role === 'user' ? 'You: ' : 'Cooper: '}{message.content}
         </div>
       )})}
     </div>
