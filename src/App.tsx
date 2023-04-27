@@ -92,7 +92,7 @@ function App() {
         <div className="bottom-section">
           <div className="input-container">
             <input value={value} onChange={(e) => setValue(e.target.value)} onKeyDown={handleInputKeyDown} />
-            <div id="submit" onClick={getMessages}>➢</div>
+            <div id="submit" onClick={getMessages} className={`${value.length > 0 ? 'active' : 'inactive'}`}>➢</div>
           </div>
           <p className="info">
             CooperChat April 25 Version. Free to use, but please credit me if you do. Does it sound like me? Let me know.
