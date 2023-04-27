@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import * as api from './services/api'
-import { Message } from './types'
 import Chat from './chats/Chat';
 import { createChat, useChatOrder, useChats } from './chats/chatsSlice';
 import { useAppDispatch } from './store';
@@ -14,12 +13,6 @@ function guid() {
   }
   return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
     s4() + '-' + s4() + s4() + s4();
-}
-
-const uniq = (arr: Array<string>) => {
-  return arr.filter((value, index, self) => {
-    return self.indexOf(value) === index;
-  });
 }
 
 function App() {
