@@ -178,7 +178,7 @@ button {
   align-items: flex-start;
   min-width: 100px;
   text-align: left;
-  padding: 10px;
+  padding: 24px;
 }
 
 .chat_message-assistant {
