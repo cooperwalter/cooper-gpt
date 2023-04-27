@@ -160,6 +160,18 @@ button {
   flex: 1;
 }
 
+.chat__empty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat__empty__text {
+  color: rgb(217, 217, 227);
+  font-size: 2em;
+}
+
 .chat_message {
   display: flex;
   flex-direction: column;
