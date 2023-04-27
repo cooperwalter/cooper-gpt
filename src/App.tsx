@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, KeyboardEvent } from 'react'
 import * as api from './services/api'
 import Chat from './chats/Chat';
 import { createChat, useChatOrder, useChats } from './chats/chatsSlice';
@@ -45,7 +45,7 @@ function App() {
     setCurrentTitle('')
   }
   
-  const handleInputKeyDown = async (e: any) => {
+  const handleInputKeyDown = async (e: KeyboardEvent) => {
     // if the key is enter, then get messages
     if (e.key === 'Enter') {
       await getMessages()
@@ -57,7 +57,6 @@ function App() {
     setCurrentChatId(chatId)
   }
 
-  const currentMessages = messages.filter(message => message.chatId ===  currentChatId)
   const historyTitles = []
   for (const chatId of chatOrder) {
     const message = messages.find(message => message.chatId === chatId)
@@ -65,8 +64,6 @@ function App() {
       historyTitles.push(message.content)
     }
   }
-
-  console.log({ chatOrder, currentChatId, currentMessages, historyTitles })
 
   return (
     <div className="app">
