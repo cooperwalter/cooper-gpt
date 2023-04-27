@@ -1,4 +1,4 @@
-import { useState, KeyboardEvent } from 'react'
+import { useState, useRef, KeyboardEvent, useEffect } from 'react'
 import * as api from './services/api'
 import Chat from './chats/Chat';
 import { createChat, useChatOrder, useChats } from './chats/chatsSlice';
@@ -16,6 +16,7 @@ function guid() {
 }
 
 function App() {
+  const scrollRef = useRef(null);
   const [value, setValue] = useState<string>('')
   const [currentChatId, setCurrentChatId] = useState<string>(guid())
   const dispatch = useAppDispatch()
@@ -57,6 +58,22 @@ function App() {
     setCurrentChatId(chatId)
   }
 
+  const scrollToBottom = () => {
+    if (scrollRef.current) {
+      // Get the maximum scroll height of the document
+      const scrollHeight = document.body.scrollHeight;
+      // Scroll to the bottom of the page
+      window.scrollTo({
+        top: scrollHeight,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages])
+
   const historyTitles = []
   for (const chatId of chatOrder) {
     const message = messages.find(message => message.chatId === chatId)
@@ -66,7 +83,7 @@ function App() {
   }
 
   return (
-    <div className="app">
+    <div className="app" ref={scrollRef}>
       <section className="side-bar">
         <button onClick={createNewChat}>+ New Chat</button>
         <ul className="history">
