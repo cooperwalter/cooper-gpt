@@ -2,6 +2,10 @@
 
 * {
   font-family: 'Open Sans', sans-serif;
+  /* configure width to include padding */
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */ 
 }
 
 body {
@@ -122,21 +126,16 @@ button {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 100%;
+  min-width: 100px;
   text-align: left;
+  padding: 10px;
 }
 
 .chat_message-assistant {
   background-color: rgba(247,247,248,var(--tw-bg-opacity));
-  padding: 10px;
-  margin: 10px;
-  width: 100%;
 }
 
 .chat_message-user {
   /* user a lighter background color */
   background-color: rgba(0,0,0,0.03);
-  padding: 10px;
-  margin: 10px;
-  width: 100%;
 }
