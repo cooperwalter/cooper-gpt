@@ -1,10 +1,15 @@
-const defaultConfig = {
+interface Config {
+  api: {
+    url: string
+  }
+}
+const defaultConfig: Config = {
   api: {
     url: ''
   }
 }
 
-let config
+let config: Config
 
 switch(import.meta.env.MODE) {
   case 'development': {
