@@ -3,12 +3,13 @@ import cors from 'cors';
 import morgan from 'morgan';
 import axios, { AxiosRequestConfig } from 'axios';
 import { Message, CompletionResponse } from './types';
+import config from './config'
 
 import buildSystemMsg from './buildSystemMsg';
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: config.allowedOrigin}));
 app.use(morgan('combined'));
 const PORT = 8000;
 
@@ -27,7 +28,7 @@ app.post('/completions', async (req, res) => {
   try {
     const options: AxiosRequestConfig = {
       headers: {
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+        Authorization: `Bearer ${config.openai.apiKey}`,
         'Content-Type': 'application/json',
       },
     };
