@@ -1,4 +1,3 @@
-console.log(process.env)
 const config = {
   openai: {
     apiKey: process.env.OPENAI_API_KEY
