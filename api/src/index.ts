@@ -7,6 +7,8 @@ import config from './config'
 
 import buildSystemMsg from './buildSystemMsg';
 
+console.log(process.env)
+
 const app = express();
 app.use(express.json());
 app.use(cors({ origin: config.allowedOrigin}));
