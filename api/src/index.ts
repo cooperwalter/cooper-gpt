@@ -22,6 +22,10 @@ const systemMessage: Message = {
   content: buildSystemMsg(),
 }
 
+app.get('/', async (_req, res) => {
+  res.send('Hello world!');
+})
+
 app.post('/completions', async (req, res) => {
   const userMessage: Message = {
     role: 'user',
