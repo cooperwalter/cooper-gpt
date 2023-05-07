@@ -27,7 +27,7 @@ switch(import.meta.env.MODE) {
       ...defaultConfig,
       api: {
         ...defaultConfig.api,
-        url: 'https://api-coopergpt.netlify.app'
+        url: 'https://cooper-gpt.cooperwalter.repl.co'
       }
     }
   }
